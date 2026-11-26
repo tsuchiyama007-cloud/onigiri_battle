@@ -1,0 +1,32 @@
+{
+  "name": "onigiri-battle",
+  "version": "1.0.0",
+  "description": "三角おにぎりをつなげて「にぎる」落ちもの対戦パズル（Web / PWA / Android）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p . && vite build",
+    "preview": "vite preview --host",
+    "test": "vitest run",
+    "android:sync": "npm run build && cap sync android",
+    "android:open": "cap open android",
+    "android:run": "npm run build && cap run android",
+    "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug",
+    "icons": "capacitor-assets generate --android"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.3",
+    "typescript": "^7.0.2",
+    "vite": "^6.4.6",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.2"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.3",
+    "@fontsource/m-plus-rounded-1c": "^5.3.0"
+  },
+  "private": true,
+  "type": "module"
+}

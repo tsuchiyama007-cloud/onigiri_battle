@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#ffd8c2" />
+    <meta name="description" content="三角おにぎりをつなげて「にぎる」落ちもの対戦パズル" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <title>おにぎりバトル！</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="bg"></canvas>
+
+      <!-- タイトル -->
+      <section id="title" class="screen active">
+        <div class="logo">
+          <canvas id="logo-art" width="320" height="140"></canvas>
+          <h1><span>おにぎり</span><span class="b">バトル！</span></h1>
+          <p class="tag">三角をつなげて、にぎって、ぶつけろ！</p>
+        </div>
+        <div class="menu">
+          <button class="btn primary" data-act="cpu">CPUとたいせん</button>
+          <button class="btn" data-act="solo">ひとりでエンドレス</button>
+          <button class="btn sub" data-act="howto">あそびかた</button>
+        </div>
+        <p class="best" id="best"></p>
+        <div class="toggles">
+          <button class="chip" id="tg-se">効果音 ON</button>
+          <button class="chip" id="tg-bgm">BGM ON</button>
+        </div>
+      </section>
+
+      <!-- 難易度 -->
+      <section id="diff" class="screen">
+        <h2>CPUのつよさ</h2>
+        <div class="menu">
+          <button class="btn easy" data-diff="easy">やさしい<small>はじめての人に</small></button>
+          <button class="btn normal" data-diff="normal">ふつう<small>ちょうどいい手ごたえ</small></button>
+          <button class="btn hard" data-diff="hard">むずかしい<small>本気のおにぎり職人</small></button>
+          <button class="btn sub" data-act="back">もどる</button>
+        </div>
+      </section>
+
+      <!-- あそびかた -->
+      <section id="howto" class="screen">
+        <h2>あそびかた</h2>
+        <div class="howto-pages" id="howto-pages"></div>
+        <div class="howto-nav">
+          <button class="chip" id="howto-prev">← まえ</button>
+          <span id="howto-dots"></span>
+          <button class="chip" id="howto-next">つぎ →</button>
+        </div>
+        <button class="btn sub" data-act="back">タイトルへ</button>
+      </section>
+
+      <!-- ゲーム -->
+      <section id="game" class="screen">
+        <canvas id="game-canvas"></canvas>
+        <div class="topbar">
+          <button class="icon-btn" id="pause-btn" aria-label="ポーズ">Ⅱ</button>
+          <span class="hint" id="hint">ドラッグ＝移動　タップ＝入れかえ　下にはらう＝落とす</span>
+        </div>
+      </section>
+
+      <!-- ポーズ -->
+      <div id="pause" class="overlay">
+        <div class="panel">
+          <h2>ひとやすみ</h2>
+          <button class="btn primary" data-act="resume">つづける</button>
+          <button class="btn" data-act="retry">さいしょから</button>
+          <button class="btn sub" data-act="quit">タイトルへ</button>
+        </div>
+      </div>
+
+      <!-- リザルト -->
+      <div id="result" class="overlay">
+        <div class="panel">
+          <h2 id="result-title">かち！</h2>
+          <canvas id="result-art" width="240" height="90"></canvas>
+          <dl class="stats" id="result-stats"></dl>
+          <p class="newbest" id="result-best"></p>
+          <button class="btn primary" data-act="retry">もういちど</button>
+          <button class="btn sub" data-act="quit">タイトルへ</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
