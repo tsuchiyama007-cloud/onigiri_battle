@@ -1,0 +1,31 @@
+<!doctype html>
+<html><body style="margin:0;background:transparent">
+<canvas id="c"></canvas>
+<script type="module">
+import { getSprite } from '/src/render/sprites.ts';
+const q = new URLSearchParams(location.search);
+const size = +q.get('size') || 512;
+const maskable = q.has('maskable');
+const c = document.getElementById('c');
+c.width = c.height = size;
+const ctx = c.getContext('2d');
+// 背景（角丸の暖色）
+const g = ctx.createLinearGradient(0, 0, 0, size);
+g.addColorStop(0, '#ffd2b8'); g.addColorStop(1, '#ffb08a');
+ctx.fillStyle = g;
+if (maskable) ctx.fillRect(0, 0, size, size);
+else { ctx.beginPath(); ctx.roundRect(0, 0, size, size, size * 0.22); ctx.fill(); }
+// 大きな三角（にぎり）を4枚で
+const area = maskable ? 0.62 : 0.8;
+const w = size * area / 2;
+const h = w * Math.sqrt(3) / 2;
+const ox = (size - w * 2) / 2;
+const oy = (size - h * 2) / 2 + size * 0.02;
+const put = (f, up, x, y) => { const sp = getSprite(f, up, w, 1); ctx.drawImage(sp.canvas, x - sp.pad, y - sp.pad); };
+put(1, true, ox + w / 2, oy);
+put(0, true, ox, oy + h);
+put(2, false, ox + w / 2, oy + h);
+put(3, true, ox + w, oy + h);
+document.title = 'ready';
+</script>
+</body></html>
