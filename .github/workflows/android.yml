@@ -28,7 +28,12 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - uses: android-actions/setup-android@v3
+      # GitHub の実行環境に最初から入っている Android SDK を使う
+      - name: Set up Android SDK
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 
       - run: npm ci
       - run: npm run build
