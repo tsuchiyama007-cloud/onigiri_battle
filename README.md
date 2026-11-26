@@ -80,6 +80,8 @@ keytool -genkey -v -keystore release.keystore -alias onigiri -keyalg RSA -keysiz
 base64 -w0 release.keystore   # Windows の PowerShell: [Convert]::ToBase64String([IO.File]::ReadAllBytes("release.keystore"))
 ```
 
+`android/` フォルダは GitHub にアップロードしなくても大丈夫です（無い場合はワークフローが自動で作ります）。
+
 **ローカルでビルド（Android Studio を使う場合）**
 
 ```bash
