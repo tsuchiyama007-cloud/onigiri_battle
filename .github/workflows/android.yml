@@ -28,11 +28,21 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-          cache: gradle
       - uses: android-actions/setup-android@v3
 
       - run: npm ci
       - run: npm run build
+
+      # android フォルダをアップロードしていない場合は、ここで自動生成する
+      - name: Create Android project if missing
+        run: |
+          if [ ! -f android/app/build.gradle ]; then
+            rm -rf android
+            npx cap add android
+            sed -i 's|android:launchMode="singleTask"|android:launchMode="singleTask"\n            android:screenOrientation="portrait"|' android/app/src/main/AndroidManifest.xml
+            npx capacitor-assets generate --android
+          fi
+
       - run: npx cap sync android
 
       - name: Set version
